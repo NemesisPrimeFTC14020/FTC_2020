@@ -28,10 +28,10 @@ public class mecanumProofOfConcept extends LinearOpMode {
             double iR = gamepad1.right_stick_x;
             if (Math.abs(iR)<= 0.05) iR = 0;
 
-            double pA = iX+iY+iR;
-            double pB = -iX+iY-iR;
-            double pC = iX+iY-iR;
-            double pD = -iX+iY+iR;
+            double pA = iR+iY+iX;
+            double pB = -iR+iY-iX;
+            double pC = iR+iY-iX;
+            double pD = -iR+iY+iX;
             double max = Math.max(1, pA);
             max = Math.max(max, pB);
             max = Math.max(max, pC);
