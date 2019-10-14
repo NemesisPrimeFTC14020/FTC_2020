@@ -21,7 +21,7 @@ public class mecanumProofOfConcept extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()) {
-            double iX = gamepad1.left_stick_x;
+            double iX = -gamepad1.left_stick_x;
             if (Math.abs(iX)<= 0.05) iX = 0;
             double iY = gamepad1.left_stick_y;
             if (Math.abs(iY)<= 0.05) iY = 0;
