@@ -1,20 +1,21 @@
-# FTC_2020
-Nemesis Prime FTC 14020 - Skystone Implementation
+# Road Runner Quickstart
 
-Useful links
+An example FTC project using [Road Runner](https://github.com/acmerobotics/road-runner). **Note:** Road Runner is in alpha and many of its APIs are incubating.
 
-FIRST Tech Challenge Skystone Git Repository
-https://github.com/FIRST-Tech-Challenge/SkyStone
+## Acknowledgements
 
-Quick FTC Teleop Tutorial 
-https://tutorialsbynick.com/ftc-basic-teleop/
+The quickstart uses the fantastic [RevExtensions2 library](https://github.com/OpenFTC/RevExtensions2) to take advantage of REV Expansion Hub bulk reads (thanks @FROGbots-4634!).
 
-Android FTC Tips
-https://tutorialsbynick.com/android-studio-tools-ftc/
+## Installation
 
-Online Simple Opmode Tester/Simulator
-http://robotics.tutorialsbynick.com/
+For more detailed instructions on getting Road Runner setup in your own project, see the [Road Runner README](https://github.com/acmerobotics/road-runner#core).
 
-FTC 8397 Team Beta's Java Based Virtual Robot - useful for testing teleop and autonomous opmodes
-https://github.com/Beta8397/virtual_robot
+1. Download or clone this repo with `git clone https://github.com/acmerobotics/road-runner-quickstart`.
 
+1. Open the project in Android Studio and build `TeamCode` like any other `ftc_app` project.
+
+1. If you have trouble with multidex, enable proguard by changing `useProguard` to `true` in `build.common.gradle`.
+
+## Documentation
+
+Check out the new [online quickstart documentation](https://acme-robotics.gitbook.io/road-runner/quickstart).
