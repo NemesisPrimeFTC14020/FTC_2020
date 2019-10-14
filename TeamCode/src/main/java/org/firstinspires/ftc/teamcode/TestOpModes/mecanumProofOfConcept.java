@@ -27,11 +27,15 @@ public class mecanumProofOfConcept extends LinearOpMode {
             if (Math.abs(iY)<= 0.05) iY = 0;
             double iR = gamepad1.right_stick_x;
             if (Math.abs(iR)<= 0.05) iR = 0;
-
+            //acquire three desired movement inputs from the
+            // driver, y translation, x translation, rotational mostion
             double pA = iR+iY+iX;
             double pB = -iR+iY-iX;
             double pC = iR+iY-iX;
             double pD = -iR+iY+iX;
+            //each axis of motion corresponds to a forward
+            // or backwards drive of a specific motor.
+            // Add or subtract these values to combine all inputs
             double max = Math.max(1, pA);
             max = Math.max(max, pB);
             max = Math.max(max, pC);
@@ -40,11 +44,15 @@ public class mecanumProofOfConcept extends LinearOpMode {
             pB /= max;
             pC /= max;
             pD /= max;
-
+            //as these values can be greater than 1,
+            // divide these values by the largest
+            // value in order to both maintain a
+            // proportional ratio of motor input across the drivtrain
             mA.setPower(pA);
             mB.setPower(pB);
             mC.setPower(pC);
             mD.setPower(pD);
+            //set these values as the respective motor powers
         }
         mA.setPower(0);
         mB.setPower(0);
