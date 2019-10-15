@@ -38,7 +38,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         // TODO: adjust the names of the following hardware devices to match your configuration
         // for simplicity, we assume that the desired IMU and drive motors are on the same hub
         // if your motors are split between hubs, **you will need to add another bulk read**
-        hub = hardwareMap.get(ExpansionHubEx.class, "hub");
+        hub = hardwareMap.get(ExpansionHubEx.class, "Expansion Hub 2");
 
         imu = LynxOptimizedI2cFactory.createLynxEmbeddedImu(hub.getStandardModule(), 0);
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -49,10 +49,10 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
-        leftFront = hardwareMap.get(ExpansionHubMotor.class, "leftFront");
-        leftRear = hardwareMap.get(ExpansionHubMotor.class, "leftRear");
-        rightRear = hardwareMap.get(ExpansionHubMotor.class, "rightRear");
-        rightFront = hardwareMap.get(ExpansionHubMotor.class, "rightFront");
+        leftFront = hardwareMap.get(ExpansionHubMotor.class, "motor A");
+        leftRear = hardwareMap.get(ExpansionHubMotor.class, "motor D");
+        rightRear = hardwareMap.get(ExpansionHubMotor.class, "motor C");
+        rightFront = hardwareMap.get(ExpansionHubMotor.class, "motor B");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
@@ -65,10 +65,10 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         }
 
         // TODO: reverse any motors using DcMotor.setDirection()
-
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        leftRear.setDirection(DcMotor.Direction.REVERSE);
         // TODO: set the tuned coefficients from DriveVelocityPIDTuner if using RUN_USING_ENCODER
-        // setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, ...);
-
+        setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDCoefficients(0.4, 0.01, 0.02));
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
     }
