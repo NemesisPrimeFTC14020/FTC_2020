@@ -17,7 +17,7 @@ public class mecanumProofOfConcept extends LinearOpMode {
         DcMotor mC = hardwareMap.dcMotor.get ("motor C");
         DcMotor mD = hardwareMap.dcMotor.get ("motor D");
         mB.setDirection(DcMotor.Direction.REVERSE);
-        mD.setDirection(DcMotor.Direction.REVERSE);
+        mC.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         while(opModeIsActive()) {
