@@ -11,6 +11,9 @@ import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 
 
 @TeleOp(name="colour sensour", group="A")
+// Test complete. Needs to be within 1/4 of an inch to work.
+// Maybe we can try machine learning with the HSV values to increase range.
+// Use a light too for increased range
 
 public class Colour_sensour extends LinearOpMode {
 
@@ -20,6 +23,7 @@ public class Colour_sensour extends LinearOpMode {
     public void runOpMode() {
         sensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
         float[] hsvValues = new float[3];
+        // float[] distanceTable = new float[];
         waitForStart();
 
         while (opModeIsActive()) {
