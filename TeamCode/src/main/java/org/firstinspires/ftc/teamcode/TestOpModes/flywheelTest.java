@@ -3,25 +3,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="flywheelTest", group="Linear Opmode")
+@TeleOp(name="Clawtest", group="Linear Opmode")
 
 public class flywheelTest extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     @Override
     public void runOpMode() {
-        DcMotor mA = hardwareMap.dcMotor.get ("motor A");
-        DcMotor mB = hardwareMap.dcMotor.get ("motor B");
-        mB.setDirection(DcMotor.Direction.REVERSE);
-        mB.setDirection(DcMotor.Direction.REVERSE);
-
+        Servo servo = hardwareMap.servo.get("servo");
         waitForStart();
+        servo.setPosition(0.0);
         while(opModeIsActive()) {
-           mA.setPower(1);
-           mB.setPower(1);
+           if (gamepad1.a) servo.setPosition(1.0); else if (gamepad1.b) servo.setPosition(0.0);
+           telemetry.addData("Servopos", servo.getPosition());
+           telemetry.update();
         }
-        mA.setPower(0);
-        mB.setPower(1);
     }
 }
