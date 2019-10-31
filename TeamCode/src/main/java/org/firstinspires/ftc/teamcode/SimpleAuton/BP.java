@@ -9,8 +9,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class BP {
     double COUNTS_PER_MM = 1;
     public BPHW HW = new BPHW();
+    public fstAuton fstAuton = new fstAuton();
 
-    public void encDriveF(double speed, double MM, LinearOpMode OM) {
+
+    public void encDriveF(double speed, double MM, LinearOpMode OM){
         int newATarget;
         int newBTarget;
         int newCTarget;
@@ -46,7 +48,7 @@ public class BP {
             HW.mD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
-    public void encDriveS ( double speed, double MM, LinearOpMode OM){
+    public void encDriveS(double speed, double MM, LinearOpMode OM){
         int newATarget;
         int newBTarget;
         int newCTarget;
@@ -65,6 +67,7 @@ public class BP {
             HW.mC.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             HW.mD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             HW.mA.setPower(Math.abs(speed));
+            HW.mB.setPower(Math.abs(speed));
             HW.mC.setPower(Math.abs(speed));
             HW.mD.setPower(Math.abs(speed));
             while (OM.opModeIsActive() &&
@@ -81,5 +84,30 @@ public class BP {
             HW.mC.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             HW.mD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
+    }
+    public void encDriveFin(double speed, double in, LinearOpMode OM) {
+        double MM = 25.4 * in;
+        double C = 1;
+        // never forget to add the constant C
+        encDriveF(speed, C * MM, OM);
+    }
+    public void encDriveSin(double speed, double in, LinearOpMode OM) {
+        double MM = 25.4 * in;
+        double C = 1;
+        // he's just a constant, might as well just call it C (calibration factor)
+        encDriveS(speed, C * MM, OM);
+    }
+    public void xClaw(char direction) {}
+    public void yClaw(char direction) {}
+    public void Claw(char direction) {}
+    public void scanforStone(char direction) {
+        int c;
+        for (c = 0; c != 2; c++) {
+            if (fstbp.isSkystone()) break;
+            else bp.encDriveSin(1, 8, this);
+        }
+    }
+    public boolean isSkystone() {
+
     }
 }

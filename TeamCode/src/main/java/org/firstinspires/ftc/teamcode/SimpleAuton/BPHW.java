@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class BPHW {
@@ -14,6 +15,7 @@ public class BPHW {
     DcMotor mD = null;
     BNO055IMU imu = null;
     Servo clawServo = null;
+    NormalizedColorSensor colorSensor = null;
     public void initHW(LinearOpMode OM) {
         mA=OM.hardwareMap.get(DcMotor.class, "motor A");
         mB=OM.hardwareMap.get(DcMotor.class, "motor B");
@@ -21,6 +23,7 @@ public class BPHW {
         mD=OM.hardwareMap.get(DcMotor.class, "motor D");
         imu =OM.hardwareMap.get(BNO055IMU.class, "imu");
         clawServo=OM.hardwareMap.get(Servo.class, "servo");
+        colorSensor = OM.hardwareMap.get(NormalizedColorSensor.class, "color");
         mA.setDirection(DcMotor.Direction.REVERSE);
         mD.setDirection(DcMotor.Direction.REVERSE);
         mA.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
