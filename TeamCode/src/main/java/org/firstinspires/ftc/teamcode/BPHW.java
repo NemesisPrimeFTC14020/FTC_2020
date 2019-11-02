@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class BPHW {
 
-    DcMotor mA = null;
+  public  DcMotor mA = null;
     DcMotor mB = null;
     DcMotor mC = null;
     DcMotor mD = null;
