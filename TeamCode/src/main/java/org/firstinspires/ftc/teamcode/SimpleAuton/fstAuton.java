@@ -13,28 +13,30 @@ public class fstAuton extends LinearOpMode {
         waitForStart();
 
 
-// calculate measurements (add parameter to the claw)
 // Move forward x meters
         bp.encDriveFin(1, 54,this);
-// Drive x metersleft towards skybridge
-        bp.encDriveSin(1, 54,this);
+// Drive x meters towards skybridge
+        bp.encDriveSin(1, 72,this);
+// Drive back to line
+        bp.encDriveSin(1, -9,this);
 //Park
 
 
 
 //Lv2:
+// Open claw
+        bp.Claw('-');
 //Move forward x meters
         bp.encDriveFin(1, 54,this);
 //Collect stone with claw
-        bp.yClaw('+');
-        bp.xClaw('+');
-        bp.yClaw('-');
         bp.Claw('+');
-//Drive x meters left towards skybridge
-        bp.yClaw('+');
-        bp.xClaw('-');
-        bp.yClaw('-');
-        bp.encDriveSin(1, 54,this);
+        bp.yClaw('+', 2, this);
+// Drive back 5 inches for clearance
+        bp.encDriveFin(1, -5, this);
+// Drive x meters towards skybridge
+        bp.encDriveSin(1, 72,this);
+// Drive back to line
+        bp.encDriveSin(1, -9,this);
 //Park
 
 
@@ -42,11 +44,20 @@ public class fstAuton extends LinearOpMode {
 //Move forward x meters
         bp.encDriveFin(1, 54,this);
 //Scan for skystone
-
+        int dis = bp.scanforStone('+', this);
 //Collect skystone with claw
-//Drive x meters left towards skybridge
+        bp.Claw('+');
+        bp.yClaw('+', 2, this);
+// Drive back 5 inches for clearance
+        bp.encDriveFin(1, -5, this);
+// Drive x meters towards skybridge
+        bp.encDriveSin(1, 72 - dis,this);
+// Drive back to line
+        bp.encDriveSin(1, -9,this);
 //Park
-//
+
+
+
 //Lv4:
 //Move forward x meters
 //Collect skystone with claw

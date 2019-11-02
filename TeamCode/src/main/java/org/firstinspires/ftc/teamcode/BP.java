@@ -8,14 +8,17 @@ import org.firstinspires.ftc.teamcode.SimpleAuton.fstAuton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.NormalizedRGBA;
+import com.qualcomm.robotcore.hardware.SwitchableLight;
+import android.graphics.Color;
 
 public class BP {
     double COUNTS_PER_MM = 1;
     public BPHW HW = new BPHW();
-    public org.firstinspires.ftc.teamcode.SimpleAuton.fstAuton fstAuton = new fstAuton();
 
-
-    public void encDriveF(double speed, double MM, LinearOpMode OM){
+    public void encDriveF(double speed, double MM, LinearOpMode OM) {
         int newATarget;
         int newBTarget;
         int newCTarget;
@@ -51,7 +54,8 @@ public class BP {
             HW.mD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
-    public void encDriveS(double speed, double MM, LinearOpMode OM){
+
+    public void encDriveS(double speed, double MM, LinearOpMode OM) {
         int newATarget;
         int newBTarget;
         int newCTarget;
@@ -88,32 +92,61 @@ public class BP {
             HW.mD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
+
     public void encDriveFin(double speed, double in, LinearOpMode OM) {
         double MM = 25.4 * in;
         double C = 1;
         // never forget to add the constant C
         encDriveF(speed, C * MM, OM);
     }
+
     public void encDriveSin(double speed, double in, LinearOpMode OM) {
         double MM = 25.4 * in;
         double C = 1;
         // he's just a constant, might as well just call it C (calibration factor)
         encDriveS(speed, C * MM, OM);
     }
-    public void xClaw(char direction) {}
-    public void yClaw(char direction) {}
-    public void Claw(char direction) {}
-   /* public void scanforStone(char direction) {
+
+    public void yClaw(char direction, double in, LinearOpMode OM) {
+        double MM = 25.4 * in;
+        int d = 1;
+        if (direction == '-') d = -1;
+        double C = 1;
+
+        HW.mE.setTargetPosition(HW.mE.getCurrentPosition() - (int) (C * MM * d * COUNTS_PER_MM));
+        HW.mE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        HW.mE.setPower(1);
+        while (OM.opModeIsActive() && HW.mE.isBusy()) {
+            OM.telemetry.addData("Running to", HW.mE.getTargetPosition());
+            OM.telemetry.update();
+        }
+        HW.mE.setPower(0);
+        HW.mE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void Claw(char direction) {
+        if (direction == '-') HW.clawServo.setPosition(1);
+        else if (direction == '+') HW.clawServo.setPosition(0);
+    }
+
+    public int scanforStone(char direction, LinearOpMode OM) {
+        SwitchableLight light = (SwitchableLight) HW.colorSensor;
+        light.enableLight(true);
+        int d = 1;
+        if (direction == '-') d = -1;
+        int t = 0;
+
         int c;
         for (c = 0; c != 2; c++) {
-            if (fstbp.isSkystone()) break;
-            else bp.encDriveSin(1, 8, this);
+            if (isSkystone()) break;
+            else encDriveSin(1, d * 8, OM);
+            t++;
         }
-    }*/
-    public boolean isSkystone() {
-        return true;
+        light.enableLight(false);
+        return (t*d*8);
     }
-    public static double[] mecPower(double iX,double iY, double iR) {
+
+    public static double[] mecPower(double iX, double iY, double iR) {
         if (Math.abs(iX) <= 0.05) iX = 0;
         if (Math.abs(iY) <= 0.05) iY = 0;
         if (Math.abs(iR) <= 0.05) iR = 0;
@@ -135,6 +168,16 @@ public class BP {
         pC /= max;
         pD /= max;
         //double[] returnVal = new double[]();
-        return new double[] {pA,pB,pC,pD};
+        return new double[]{pA, pB, pC, pD};
     }
-}
+        public boolean isSkystone () {
+            float[] hsvValues = new float[3];
+
+            while (hsvValues[0] == 0) {
+                NormalizedRGBA values = HW.colorSensor.getNormalizedColors();
+                Color.colorToHSV(values.toColor(), hsvValues);
+            }
+            if (hsvValues[0] > 70) return true;
+            else return false;
+        }
+    }

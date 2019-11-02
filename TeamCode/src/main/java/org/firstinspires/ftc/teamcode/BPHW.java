@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class BPHW {
+
     DcMotor mA = null;
     DcMotor mB = null;
     DcMotor mC = null;
@@ -17,7 +18,9 @@ public class BPHW {
     BNO055IMU imu = null;
     Servo clawServo = null;
     NormalizedColorSensor colorSensor = null;
+
     public void initHW(LinearOpMode OM) {
+
         mA=OM.hardwareMap.get(DcMotor.class, "motor A");
         mB=OM.hardwareMap.get(DcMotor.class, "motor B");
         mC=OM.hardwareMap.get(DcMotor.class, "motor C");
@@ -32,10 +35,12 @@ public class BPHW {
         mB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mC.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mD.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mE.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mC.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
+        mE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+    }
 }
