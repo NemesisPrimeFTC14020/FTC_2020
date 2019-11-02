@@ -1,18 +1,32 @@
+
+Quarry
 Lv1:
 Move forward x meters
-Drive x metersleft towards skybridge
+Drive x meters towards skybridge
+Drive back to line
 Park
 
 Lv2:
 Move forward x meters
 Collect skystone with claw
-Drive x meters left towards skybridge
+Drive back 5 inches for clearance
+Drive x meters towards skybridge
+Drive back to line
 Park
 
 Lv3:
 Move forward x meters
+Scan for Skystone
 Collect skystone with claw
-Drive x meters left towards skybridge
-Place on Foundation
-Go back
+Drive back 5 inches for clearance
+Drive x meters towards skybridge
+Drive back to line
+Park
+
+Lv4:
+ -- plan to place on Foundation here
+
+Foundation
+Lv1:
+Drive x meters towards skybridge
 Park
