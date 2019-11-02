@@ -170,7 +170,8 @@ public class BP {
         //double[] returnVal = new double[]();
         return new double[]{pA, pB, pC, pD};
     }
-        public boolean isSkystone () {
+
+    public boolean isSkystone () {
             float[] hsvValues = new float[3];
 
             while (hsvValues[0] == 0) {
