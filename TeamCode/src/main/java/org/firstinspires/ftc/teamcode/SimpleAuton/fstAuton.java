@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.SimpleAuton;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.BP;
+
 @Autonomous(name = "fstAtn", group = "Linear OpMode")
 public class fstAuton extends LinearOpMode {
     public BP bp = new BP();

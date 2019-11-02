@@ -1,15 +1,18 @@
-package org.firstinspires.ftc.teamcode.SimpleAuton;
+package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.acmerobotics.roadrunner.drive.MecanumDrive;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.SimpleAuton.fstAuton;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class BP {
     double COUNTS_PER_MM = 1;
     public BPHW HW = new BPHW();
-    public fstAuton fstAuton = new fstAuton();
+    public org.firstinspires.ftc.teamcode.SimpleAuton.fstAuton fstAuton = new fstAuton();
 
 
     public void encDriveF(double speed, double MM, LinearOpMode OM){
@@ -100,14 +103,38 @@ public class BP {
     public void xClaw(char direction) {}
     public void yClaw(char direction) {}
     public void Claw(char direction) {}
-    public void scanforStone(char direction) {
+   /* public void scanforStone(char direction) {
         int c;
         for (c = 0; c != 2; c++) {
             if (fstbp.isSkystone()) break;
             else bp.encDriveSin(1, 8, this);
         }
-    }
+    }*/
     public boolean isSkystone() {
-
+        return true;
+    }
+    public static double[] mecPower(double iX,double iY, double iR) {
+        if (Math.abs(iX) <= 0.05) iX = 0;
+        if (Math.abs(iY) <= 0.05) iY = 0;
+        if (Math.abs(iR) <= 0.05) iR = 0;
+        //acquire three desired movement inputs from the
+        // driver, y translation, x translation, rotational mostion
+        double pA = iR + iY + iX;
+        double pB = -iR + iY - iX;
+        double pC = -iR + iY + iX;
+        double pD = iR + iY - iX;
+        //each axis of motion corresponds to a forward
+        // or backwards drive of a specific motor.
+        // Add or subtract these values to combine all inputs
+        double max = Math.max(1, pA);
+        max = Math.max(max, pB);
+        max = Math.max(max, pC);
+        max = Math.max(max, pD);
+        pA /= max;
+        pB /= max;
+        pC /= max;
+        pD /= max;
+        //double[] returnVal = new double[]();
+        return new double[] {pA,pB,pC,pD};
     }
 }

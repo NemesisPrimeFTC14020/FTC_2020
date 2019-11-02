@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.SimpleAuton;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -13,6 +13,7 @@ public class BPHW {
     DcMotor mB = null;
     DcMotor mC = null;
     DcMotor mD = null;
+    DcMotor mE = null;
     BNO055IMU imu = null;
     Servo clawServo = null;
     NormalizedColorSensor colorSensor = null;
@@ -23,6 +24,7 @@ public class BPHW {
         mD=OM.hardwareMap.get(DcMotor.class, "motor D");
         imu =OM.hardwareMap.get(BNO055IMU.class, "imu");
         clawServo=OM.hardwareMap.get(Servo.class, "servo");
+        mE = OM.hardwareMap.get(DcMotor.class, "elevatormotor");
         colorSensor = OM.hardwareMap.get(NormalizedColorSensor.class, "color");
         mA.setDirection(DcMotor.Direction.REVERSE);
         mD.setDirection(DcMotor.Direction.REVERSE);
