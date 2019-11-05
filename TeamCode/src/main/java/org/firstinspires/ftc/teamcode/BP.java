@@ -29,9 +29,10 @@ public class BP {
             HW.mB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             HW.mC.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             HW.mD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            HW.mA.setPower(Math.abs(speed));
+            HW.mA.setPower(Math.abs(speed*.95));
+            HW.mB.setPower(Math.abs(speed));
             HW.mC.setPower(Math.abs(speed));
-            HW.mD.setPower(Math.abs(speed));
+            HW.mD.setPower(Math.abs(speed*.95));
             while (OM.opModeIsActive() &&
                     (HW.mA.isBusy() && HW.mB.isBusy() && HW.mC.isBusy() && HW.mD.isBusy())) {
                 OM.telemetry.addData("Path1", "Running to %7d :%7d :%7d :%7d", newATarget, newBTarget, newCTarget, newDTarget);
@@ -122,7 +123,7 @@ public class BP {
         else if (direction == '+') HW.clawServo.setPosition(0);
     }
 
-    public int scanforStone(char direction, LinearOpMode OM) {
+    /*public int scanforStone(char direction, LinearOpMode OM) {
         SwitchableLight light = (SwitchableLight) HW.colorSensor;
         light.enableLight(true);
         int d = 1;
@@ -137,7 +138,7 @@ public class BP {
         }
         light.enableLight(false);
         return (t*d*8);
-    }
+    }*/
 
     public static double[] mecPower(double iX, double iY, double iR) {
         if (Math.abs(iX) <= 0.05) iX = 0;
@@ -164,7 +165,7 @@ public class BP {
         return new double[]{pA, pB, pC, pD};
     }
 
-    public boolean isSkystone () {
+  /*  public boolean isSkystone () {
             float[] hsvValues = new float[3];
 
             while (hsvValues[0] == 0) {
@@ -173,5 +174,5 @@ public class BP {
             }
             if (hsvValues[0] > 70) return true;
             else return false;
-        }
+        }*/
     }

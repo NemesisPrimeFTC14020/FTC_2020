@@ -16,14 +16,14 @@ public class Level3Quarry extends LinearOpMode {
 //Move forward x meters
         bp.encDriveFin(1, 54,this);
 //Scan for skystone
-        int dis = bp.scanforStone('+', this);
+       // int dis = bp.scanforStone('+', this);
 //Collect skystone with claw
         bp.Claw('+');
         bp.yClaw('+', 2, this);
 // Drive back 5 inches for clearance
         bp.encDriveFin(1, -5, this);
 // Drive x meters towards skybridge
-        bp.encDriveSin(1, 72 - dis,this);
+        //bp.encDriveSin(1, 72 - dis,this);
 // Drive back to line
         bp.encDriveSin(1, -9,this);
 //Park
