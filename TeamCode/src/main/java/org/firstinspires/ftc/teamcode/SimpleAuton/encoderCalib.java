@@ -11,7 +11,8 @@ public class encoderCalib extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         bp.HW.initHW(this);
         waitForStart();
-        bp.encDriveF(1,1000,this);
+        bp.encDriveF(1,250,this);
         telemetry.addData("encoderval", bp.HW.mA.getCurrentPosition());
+        telemetry.update();
     }
 }
