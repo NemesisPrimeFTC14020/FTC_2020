@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="nick = 1520", group="A")
+@TeleOp(name="armtest", group="A")
 
 public class Servo_sample extends LinearOpMode {
 
@@ -14,19 +14,25 @@ public class Servo_sample extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        test = hardwareMap.get(Servo.class, "test");
-        double position = 0;
+        Servo servo = hardwareMap.get(Servo.class, "test");
+        DcMotor linearMotor = hardwareMap.get(DcMotor.class,"linear");
+        double position = servo.getPosition();
         waitForStart();
-
         while (opModeIsActive()) {
-
-            if (gamepad1.x && position < 1) position += 0.1;
-            if (gamepad1.b && position > 0) position -= 0.1;
-
-            if (gamepad1.dpad_up) test.setPosition(position);
-
-            telemetry.addData("Target location", test.getPosition());
-            telemetry.update();
+            if (gamepad1.a) {
+                linearMotor.setPower(1);
+            } else if(gamepad1.b) {
+                linearMotor.setPower(-1);
+            } else {
+                linearMotor.setPower(0);
+            }
+            if (gamepad1.x) {
+                position = position + .05;
+            } else if (gamepad1.y) {
+                position = position - .05;
+            }
+            position = Math.max(0,Math.min(1,position));
+            servo.setPosition(position);
         }
 
     }

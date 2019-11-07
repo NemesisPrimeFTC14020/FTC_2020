@@ -14,9 +14,15 @@ public class Teleop extends LinearOpMode {
         bp.HW.initHW(this);
         double[] powers;
         boolean servoPos = true;
+        boolean global = true;
         waitForStart();
         while(opModeIsActive()) {
-            powers = bp.mecPower(gamepad1.left_stick_x, gamepad1.left_stick_y,gamepad1.right_stick_x);
+            if (gamepad1.left_bumper) global = !global;
+            if (global) {
+                powers = bp.mecPowerX(gamepad1.left_stick_x, gamepad1.left_stick_y,gamepad1.right_stick_x,0,this, bp.HW.imu.getAngularOrientation().thirdAngle);
+            } else {
+                powers = bp.mecPower(gamepad1.left_stick_x, gamepad1.left_stick_y,gamepad1.right_stick_x);
+            }
 
             bp.HW.mA.setPower(powers[0]);
             bp.HW.mB.setPower(powers[1]);

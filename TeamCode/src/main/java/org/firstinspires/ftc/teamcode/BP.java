@@ -174,4 +174,34 @@ public class BP {
             if (hsvValues[0] > 70) return true;
             else return false;
         }
+    public static double[] mecPowerX(double iX, double iY, double iR, double offset, LinearOpMode OM, double robotAngle) {
+        if (Math.abs(iX) <= 0.05) iX = 0;
+        if (Math.abs(iY) <= 0.05) iY = 0;
+        if (Math.abs(iR) <= 0.05) iR = 0;
+        double globalAngle = Math.atan2(iY,iX);
+        double globalMagnitude = Math.sqrt((iY*iY) + (iX*iX));
+        double localAngle = globalAngle + robotAngle;
+        double X = Math.cos(globalAngle)*globalMagnitude;
+        double Y = Math.sin(globalAngle)*globalMagnitude;
+        //acquire three desired movement inputs from the
+        // driver, y translation, x translation, rotational mostion
+        double pA = iR + Y + X;
+        double pB = -iR + Y - X;
+        double pC = -iR + Y + X;
+        double pD = iR + Y - X;
+        //each axis of motion corresponds to a forward
+        // or backwards drive of a specific motor.
+        // Add or subtract these values to combine all inputs
+        double max = Math.max(pA, pA);
+        max = Math.max(max, pB);
+        max = Math.max(max, pC);
+        max = Math.max(max, pD);
+        pA /= max;
+        pB /= max;
+        pC /= max;
+        pD /= max;
+        //double[] returnVal = new double[]();
+        return new double[]{pA, pB, pC, pD};
     }
+
+}
