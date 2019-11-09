@@ -1,32 +1,38 @@
 
-Quarry
-Lv1:
-Move forward x meters
-Drive x meters towards skybridge
-Drive back to line
-Park
+//Quarry
+//Lv1:
+//Extend claw
 
-Lv2:
-Move forward x meters
-Collect skystone with claw
-Drive back 5 inches for clearance
-Drive x meters towards skybridge
-Drive back to line
-Park
+//Lv2:
+//Move forward x meters
+//Collect skystone with claw
+//Drive back 5 inches for clearance
+//Drive x inches towards skybridge
+//Drive back to line
 
-Lv3:
-Move forward x meters
-Scan for Skystone
-Collect skystone with claw
-Drive back 5 inches for clearance
-Drive x meters towards skybridge
-Drive back to line
-Park
+//Lv3:
+//Extend claw
+//Move forward x meters
+//Scan for Skystone
+//Claw Skystone
+//Drive back 5 inches for clearance
+//Drive x inches towards skybridge
+//Extend claw
+//Drive back to line
 
 Lv4:
- -- plan to place on Foundation here
+//
 
-Foundation
-Lv1:
-Drive x meters towards skybridge
-Park
+//Foundation
+//Lv1:
+//Extend claw
+
+//Lv2:
+//Bring extrusions up x inches to be above the Foundation
+//Move x inches forward
+//Drop extrusions
+//Pull 40.5 inches in (40 to maximize clearance + 0.5 in more for good measure)
+//Bring extrusions up x inches to be above the Foundation
+//Drive 20 inches towards skybridge
+//Drop down elevator
+//Drive x inches towards skybridge

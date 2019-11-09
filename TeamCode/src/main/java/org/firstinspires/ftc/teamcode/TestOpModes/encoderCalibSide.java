@@ -1,18 +1,17 @@
-package org.firstinspires.ftc.teamcode.SimpleAuton;
+package org.firstinspires.ftc.teamcode.TestOpModes;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.BP;
 
-@Autonomous(name = "encCalib", group = "Linear OpMode")
-public class encoderCalib extends LinearOpMode {
+@Autonomous(name = "encCalibSide", group = "Linear OpMode")
+public class encoderCalibSide extends LinearOpMode {
     public BP bp = new BP();
     @Override
     public void runOpMode() throws InterruptedException {
         bp.HW.initHW(this);
         waitForStart();
-        bp.encDriveF(1,250,this);
-        telemetry.addData("encoderval", bp.HW.mA.getCurrentPosition());
-        telemetry.update();
+        bp.encDriveS(1,500,this);
+        telemetry.addData("encoderval", 500/bp.HW.mA.getCurrentPosition());
     }
 }

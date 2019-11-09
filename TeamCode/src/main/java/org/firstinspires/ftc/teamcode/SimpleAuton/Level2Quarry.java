@@ -19,14 +19,12 @@ public class Level2Quarry extends LinearOpMode {
         bp.encDriveFin(1, 54,this);
 //Collect stone with claw
         bp.Claw('+');
-        bp.yClaw('+', 2, this);
 // Drive back 5 inches for clearance
         bp.encDriveFin(1, -5, this);
 // Drive x meters towards skybridge
         bp.encDriveSin(1, 72,this);
 // Drive back to line
         bp.encDriveSin(1, -9,this);
-//Park
 
     }
 }

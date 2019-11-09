@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TestOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -31,8 +31,12 @@ public class Servo_sample extends LinearOpMode {
             } else if (gamepad1.y) {
                 position = position - .05;
             }
-            position = Math.max(0,Math.min(1,position));
+            position = Math.max(0,position);
+            position = Math.min(1, position);
             servo.setPosition(position);
+            telemetry.addData("postion", position);
+            telemetry.addData("servopos", servo.getPosition());
+            telemetry.update();
         }
 
     }

@@ -12,6 +12,8 @@ public class Level1Foundation extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         bp.HW.initHW(this);
         waitForStart();
-        bp.encDriveSin(1, 18, this);
+        //Lv1:
+        //Extend claw
+        bp.Claw('+');
     }
 }

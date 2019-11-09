@@ -8,7 +8,9 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
 import android.graphics.Color;
 
 public class BP {
-    double COUNTS_PER_MM = 1;
+    private double COUNTS_PER_MM = 1;
+    private int clawOut = 1;
+    private int clawIn = 0;
     public BPHW HW = new BPHW();
 
     public void encDriveF(double speed, double MM, LinearOpMode OM) {
@@ -118,11 +120,11 @@ public class BP {
     }
 
     public void Claw(char direction) {
-        if (direction == '-') HW.clawServo.setPosition(1);
-        else if (direction == '+') HW.clawServo.setPosition(0);
+        if (direction == '-') HW.clawServo.setPosition(clawOut);
+        else if (direction == '+') HW.clawServo.setPosition(clawIn);
     }
 
-    public int scanforStone(char direction, LinearOpMode OM) {
+    /*public int scanforStone(char direction, LinearOpMode OM) {
         SwitchableLight light = (SwitchableLight) HW.colorSensor;
         light.enableLight(true);
         int d = 1;
@@ -138,7 +140,7 @@ public class BP {
         light.enableLight(false);
         return (t*d*8);
     }
-
+*/
     public static double[] mecPower(double iX, double iY, double iR) {
         if (Math.abs(iX) <= 0.05) iX = 0;
         if (Math.abs(iY) <= 0.05) iY = 0;
@@ -164,7 +166,7 @@ public class BP {
         return new double[]{pA, pB, pC, pD};
     }
 
-    public boolean isSkystone () {
+   /* public boolean isSkystone () {
             float[] hsvValues = new float[3];
 
             while (hsvValues[0] == 0) {
@@ -174,6 +176,8 @@ public class BP {
             if (hsvValues[0] > 70) return true;
             else return false;
         }
+        */
+
     public static double[] mecPowerX(double iX, double iY, double iR, double offset, LinearOpMode OM, double robotAngle) {
         if (Math.abs(iX) <= 0.05) iX = 0;
         if (Math.abs(iY) <= 0.05) iY = 0;

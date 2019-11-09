@@ -12,13 +12,9 @@ public class Level1Quarry extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         bp.HW.initHW(this);
         waitForStart();
-        // Lv1:
-// Move forward x meters
-        bp.encDriveFin(1, 54, this);
-// Drive x meters towards skybridge
-        bp.encDriveSin(1, 72, this);
-// Drive back to line
-        bp.encDriveSin(1, -9, this);
-//Park
+        //Lv1:
+        //Extend claw
+        bp.Claw('+');
+
     }
 }
