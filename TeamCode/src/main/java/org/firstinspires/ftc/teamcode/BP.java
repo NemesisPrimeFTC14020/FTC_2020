@@ -110,7 +110,7 @@ public class BP {
 
         HW.mE.setTargetPosition(HW.mE.getCurrentPosition() - (int) (C * MM * d * COUNTS_PER_MM));
         HW.mE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        HW.mE.setPower(1);
+        HW.mE.setPower(0.7);
         while (OM.opModeIsActive() && HW.mE.isBusy()) {
             OM.telemetry.addData("Running to", HW.mE.getTargetPosition());
             OM.telemetry.update();
@@ -124,7 +124,18 @@ public class BP {
         else if (direction == '+') HW.clawServo.setPosition(clawIn);
     }
 
-    /*public int scanforStone(char direction, LinearOpMode OM) {
+    public boolean isSkystone () {
+        float[] hsvValues = new float[3];
+
+        while (hsvValues[0] == 0) {
+            NormalizedRGBA values = HW.colorSensor.getNormalizedColors();
+            Color.colorToHSV(values.toColor(), hsvValues);
+        }
+        if (hsvValues[0] > 70) return true;
+        else return false;
+    }
+
+    public int scanforStone(char direction, LinearOpMode OM) {
         SwitchableLight light = (SwitchableLight) HW.colorSensor;
         light.enableLight(true);
         int d = 1;
@@ -140,7 +151,7 @@ public class BP {
         light.enableLight(false);
         return (t*d*8);
     }
-*/
+
     public static double[] mecPower(double iX, double iY, double iR) {
         if (Math.abs(iX) <= 0.05) iX = 0;
         if (Math.abs(iY) <= 0.05) iY = 0;
@@ -165,18 +176,6 @@ public class BP {
         //double[] returnVal = new double[]();
         return new double[]{pA, pB, pC, pD};
     }
-
-   /* public boolean isSkystone () {
-            float[] hsvValues = new float[3];
-
-            while (hsvValues[0] == 0) {
-                NormalizedRGBA values = HW.colorSensor.getNormalizedColors();
-                Color.colorToHSV(values.toColor(), hsvValues);
-            }
-            if (hsvValues[0] > 70) return true;
-            else return false;
-        }
-        */
 
     public static double[] mecPowerX(double iX, double iY, double iR, double offset, LinearOpMode OM, double robotAngle) {
         if (Math.abs(iX) <= 0.05) iX = 0;

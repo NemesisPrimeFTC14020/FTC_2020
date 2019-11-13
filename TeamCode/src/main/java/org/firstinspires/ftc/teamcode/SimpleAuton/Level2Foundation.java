@@ -24,10 +24,10 @@ public class Level2Foundation extends LinearOpMode {
 //Bring extrusions up x inches to be above the Foundation
         bp.yClaw('+', 0, this);
 //Drive 20 inches towards skybridge
-        bp.encDriveSin(1, 20, this);
+        bp.encDriveSin(1, -20, this);
 //Drop down elevator
         bp.yClaw('-', 1, this);
 //Drive x inches towards skybridge
-        bp.encDriveSin(1, 2, this);
+        bp.encDriveSin(1, -2, this);
     }
 }

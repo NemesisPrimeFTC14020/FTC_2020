@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.BP;
 
 @Autonomous(name = "QuarryLv2", group = "Linear OpMode")
-public class Level2Quarry extends LinearOpMode {
+public class Level2QuarryRed extends LinearOpMode {
     public BP bp = new BP();
 
     @Override
@@ -22,9 +22,9 @@ public class Level2Quarry extends LinearOpMode {
 // Drive back 5 inches for clearance
         bp.encDriveFin(1, -5, this);
 // Drive x meters towards skybridge
-        bp.encDriveSin(1, 72,this);
+        bp.encDriveSin(1, -72,this);
 // Drive back to line
-        bp.encDriveSin(1, -9,this);
+        bp.encDriveSin(1, 9,this);
 
     }
 }

@@ -12,7 +12,7 @@ public class encoderCalib extends LinearOpMode {
         bp.HW.initHW(this);
         waitForStart();
         bp.encDriveF(1,500,this);
-        telemetry.addData("encoderval", 500/bp.HW.mA.getCurrentPosition());
+        telemetry.addData("encoderval", bp.HW.mA.getCurrentPosition());
         telemetry.update();
     }
 }
