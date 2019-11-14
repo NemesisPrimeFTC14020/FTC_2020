@@ -103,20 +103,20 @@ public class BP {
     }
 
     public void yClaw(char direction, double in, LinearOpMode OM) {
-        double MM = 25.4 * in;
+       /* double MM = 25.4 * in;
         int d = 1;
         if (direction == '-') d = -1;
         double C = 1;
 
-        HW.mE.setTargetPosition(HW.mE.getCurrentPosition() - (int) (C * MM * d * COUNTS_PER_MM));
-        HW.mE.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        HW.mE.setPower(0.7);
-        while (OM.opModeIsActive() && HW.mE.isBusy()) {
-            OM.telemetry.addData("Running to", HW.mE.getTargetPosition());
+        HW.elevator.setTargetPosition(HW.elevator.getCurrentPosition() - (int) (C * MM * d * COUNTS_PER_MM));
+        HW.elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        HW.elevator.setPower(0.7);
+        while (OM.opModeIsActive() && HW.elevator.isBusy()) {
+            OM.telemetry.addData("Running to", HW.elevator.getTargetPosition());
             OM.telemetry.update();
         }
-        HW.mE.setPower(0);
-        HW.mE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        HW.elevator.setPower(0);
+        HW.elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
     }
 
     public void Claw(char direction) {
@@ -165,46 +165,49 @@ public class BP {
         //each axis of motion corresponds to a forward
         // or backwards drive of a specific motor.
         // Add or subtract these values to combine all inputs
-        double max = Math.max(1, pA);
-        max = Math.max(max, pB);
-        max = Math.max(max, pC);
-        max = Math.max(max, pD);
+        double max = Math.abs(Math.max(pA, pA));
+        max = Math.abs(Math.max(max, pB));
+        max = Math.abs(Math.max(max, pC));
+        max = Math.abs(Math.max(max, pD));
         pA /= max;
         pB /= max;
         pC /= max;
         pD /= max;
         //double[] returnVal = new double[]();
-        return new double[]{pA, pB, pC, pD};
+        return new double[]{pA, pB, pC, pD, 0, 0};
     }
 
     public static double[] mecPowerX(double iX, double iY, double iR, double offset, LinearOpMode OM, double robotAngle) {
         if (Math.abs(iX) <= 0.05) iX = 0;
         if (Math.abs(iY) <= 0.05) iY = 0;
         if (Math.abs(iR) <= 0.05) iR = 0;
-        double globalAngle = Math.atan2(iY,iX);
-        double globalMagnitude = Math.sqrt((iY*iY) + (iX*iX));
-        double localAngle = globalAngle + robotAngle;
-        double X = Math.cos(globalAngle)*globalMagnitude;
-        double Y = Math.sin(globalAngle)*globalMagnitude;
+        double pA;
+        double pB;
+        double pC;
+        double pD;
+        double Y = iY*Math.cos(-Math.toRadians(robotAngle)) + iX*Math.sin(-Math.toRadians(robotAngle));
+        double X = -iY*Math.sin(-Math.toRadians(robotAngle)) + iX*Math.cos(-Math.toRadians(robotAngle));
         //acquire three desired movement inputs from the
         // driver, y translation, x translation, rotational mostion
-        double pA = iR + Y + X;
-        double pB = -iR + Y - X;
-        double pC = -iR + Y + X;
-        double pD = iR + Y - X;
+        pA = iR + Y + X;
+        pB = -iR + Y - X;
+        pC = -iR + Y + X;
+        pD = iR + Y - X;
         //each axis of motion corresponds to a forward
         // or backwards drive of a specific motor.
         // Add or subtract these values to combine all inputs
-        double max = Math.max(pA, pA);
-        max = Math.max(max, pB);
-        max = Math.max(max, pC);
-        max = Math.max(max, pD);
+        double max = Math.abs(Math.max(pA, pA));
+        max = Math.abs(Math.max(max, pB));
+        max = Math.abs(Math.max(max, pC));
+        max = Math.abs(Math.max(max, pD));
         pA /= max;
         pB /= max;
         pC /= max;
         pD /= max;
-        //double[] returnVal = new double[]();
-        return new double[]{pA, pB, pC, pD};
+        return new double[]{pA, pB, pC, pD, X, Y};
     }
-
+   public double getHeading(LinearOpMode OM) {
+        double rawAngle = Math.toDegrees(HW.imu.getAngularOrientation().firstAngle);
+        return(rawAngle);
+    }
 }
