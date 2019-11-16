@@ -106,9 +106,10 @@ public class BP {
         encDriveS(speed, C * MM, OM);
     }
 
-    public void gyroTurn(double speed, double angle, LinearOpMode OM) {
+    public void gyroTurn(double speed, double angle) {
+        double C = 0.9;
         if (angle < 0) speed = -speed;
-      while (Math.abs(getHeading()) < Math.abs(angle)) {
+      while (Math.abs(getHeading()) < Math.abs(C * angle)) {
           HW.mA.setPower(speed);
           HW.mB.setPower(-speed);
           HW.mC.setPower(-speed);

@@ -29,7 +29,7 @@ public class Level2FoundationRed extends LinearOpMode {
         */
         // moves left 12 in
         bp.curveClaw(0.25);
-        bp.encDriveSin(1, 5, this);
+        bp.encDriveSin(1, 6, this);
         // elevator up 2.5 in
         bp.yClawTime('+', 2.5, this);
         // moves forward 34 in
@@ -40,12 +40,12 @@ public class Level2FoundationRed extends LinearOpMode {
         bp.encDriveFin(1, backwarddis, this);
         // elevator up 2 in
         bp.yClawTime('+', 2, this);
+        bp.gyroTurn(1, 10);
         // moves right 48 in
-        bp.encDriveSin(1, -27, this);
+        bp.encDriveSin(1, -30, this);
         bp.encDriveFin(1, 24, this);
         bp.encDriveSin(1, -12, this);
-        bp.gyroTurn(1, -90, this);
-        bp.Claw('-');
-        sleep(2000);
+        bp.gyroTurn(1, -90);
+        bp.encDriveFin(1, 6, this);
     }
 }
