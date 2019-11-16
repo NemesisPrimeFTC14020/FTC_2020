@@ -1,23 +1,22 @@
 
 //Quarry
 //Lv1:
-//Extend claw
+//Move sideways 9 inches
 
 //Lv2:
-//Move forward x meters
-//Collect skystone with claw
-//Drive back 5 inches for clearance
-//Drive x inches towards skybridge
-//Drive back to line
+//
 
 //Lv3:
+//Curve claw forward
 //Extend claw
 //Move forward x meters
 //Scan for Skystone
 //Claw Skystone
+//Lift claw 0.4 with servo
 //Drive back 5 inches for clearance
 //Drive x inches towards skybridge
 //Extend claw
+//Curve claw forward
 //Drive back to line
 
 Lv4:
@@ -25,7 +24,7 @@ Lv4:
 
 //Foundation
 //Lv1:
-//Extend claw
+//Move sideways 9 inches
 
 //Lv2:
 //Bring extrusions up x inches to be above the Foundation

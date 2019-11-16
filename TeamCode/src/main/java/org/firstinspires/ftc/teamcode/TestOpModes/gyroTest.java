@@ -12,7 +12,7 @@ public class gyroTest extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive()) {
-            telemetry.addData("angle", bp.getHeading(this));
+            telemetry.addData("angle", bp.getHeading());
             telemetry.update();
         }
     }

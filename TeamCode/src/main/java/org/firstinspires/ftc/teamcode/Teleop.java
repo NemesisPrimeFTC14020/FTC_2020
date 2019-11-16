@@ -1,11 +1,7 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-
-import java.util.ArrayList;
 
 @TeleOp(name = "telOp", group = "Linear OpMode")
 public class Teleop extends LinearOpMode {
@@ -27,10 +23,10 @@ public class Teleop extends LinearOpMode {
                 global = !global;
                 sleep(200);
             }
-            heading = bp.getHeading(this);
+            heading = bp.getHeading();
             if (global) {
                 //an input of postiive one leads to forward translation, right sideways motion, and clockwise rotation
-                powers = bp.mecPowerX(gamepad1.left_stick_x, -gamepad1.left_stick_y,gamepad1.right_stick_x,0,this, heading);
+                powers = bp.mecPowerField(gamepad1.left_stick_x, -gamepad1.left_stick_y,gamepad1.right_stick_x,0,this, heading);
             } else {
                 powers = bp.mecPower(gamepad1.left_stick_x, -gamepad1.left_stick_y,gamepad1.right_stick_x);
             }
@@ -51,10 +47,11 @@ public class Teleop extends LinearOpMode {
             else if (gamepad1.y) {
                 armServo = false;
             }
+            if (gamepad1.right_bumper) bp.HW.capServo.setPosition(Math.abs(bp.HW.capServo.getPosition() - 1));
             if(gamepad1.left_trigger >= 0.1) {
-                bp.HW.elevator.setPower(.6);
+                bp.HW.elevator.setPower(.3);
             } else if (gamepad1.right_trigger >= 0.1) {
-                bp.HW.elevator.setPower(-.6);
+                bp.HW.elevator.setPower(-.3);
             } else {
                 bp.HW.elevator.setPower(0);
             }

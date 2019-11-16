@@ -3,14 +3,17 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.SwitchableLight;
 import android.graphics.Color;
 
 public class BP {
-    private double COUNTS_PER_MM = 1;
-    private int clawOut = 1;
-    private int clawIn = 0;
+    private double COUNTS_PER_MM_FORWARD = .70053521 ;
+    private double COUNTS_PER_MM_SIDEWAYS = .91151321 ;
+    private double COUNTS_PER_IN_ELEVATOR = 1;
+    private int clawOut = 0;
+    private int clawIn = 1;
     public BPHW HW = new BPHW();
 
     public void encDriveF(double speed, double MM, LinearOpMode OM) {
@@ -19,10 +22,10 @@ public class BP {
         int newCTarget;
         int newDTarget;
         if (OM.opModeIsActive()) {
-            newATarget = HW.mA.getCurrentPosition() - (int) (MM * COUNTS_PER_MM);
-            newBTarget = HW.mB.getCurrentPosition() - (int) (MM * COUNTS_PER_MM);
-            newCTarget = HW.mC.getCurrentPosition() - (int) (MM * COUNTS_PER_MM);
-            newDTarget = HW.mD.getCurrentPosition() - (int) (MM * COUNTS_PER_MM);
+            newATarget = HW.mA.getCurrentPosition() + (int) (MM * COUNTS_PER_MM_FORWARD);
+            newBTarget = HW.mB.getCurrentPosition() + (int) (MM * COUNTS_PER_MM_FORWARD);
+            newCTarget = HW.mC.getCurrentPosition() + (int) (MM * COUNTS_PER_MM_FORWARD);
+            newDTarget = HW.mD.getCurrentPosition() + (int) (MM * COUNTS_PER_MM_FORWARD);
             HW.mA.setTargetPosition(newATarget);
             HW.mB.setTargetPosition(newBTarget);
             HW.mC.setTargetPosition(newCTarget);
@@ -32,6 +35,7 @@ public class BP {
             HW.mC.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             HW.mD.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             HW.mA.setPower(Math.abs(speed));
+            HW.mB.setPower(Math.abs(speed));
             HW.mC.setPower(Math.abs(speed));
             HW.mD.setPower(Math.abs(speed));
             while (OM.opModeIsActive() &&
@@ -56,10 +60,10 @@ public class BP {
         int newCTarget;
         int newDTarget;
         if (OM.opModeIsActive()) {
-            newATarget = HW.mA.getCurrentPosition() - (int) (MM * COUNTS_PER_MM);
-            newBTarget = HW.mB.getCurrentPosition() + (int) (MM * COUNTS_PER_MM);
-            newCTarget = HW.mC.getCurrentPosition() - (int) (MM * COUNTS_PER_MM);
-            newDTarget = HW.mD.getCurrentPosition() + (int) (MM * COUNTS_PER_MM);
+            newATarget = HW.mA.getCurrentPosition() + (int) (MM * COUNTS_PER_MM_SIDEWAYS);
+            newBTarget = HW.mB.getCurrentPosition() - (int) (MM * COUNTS_PER_MM_SIDEWAYS);
+            newCTarget = HW.mC.getCurrentPosition() + (int) (MM * COUNTS_PER_MM_SIDEWAYS);
+            newDTarget = HW.mD.getCurrentPosition() - (int) (MM * COUNTS_PER_MM_SIDEWAYS);
             HW.mA.setTargetPosition(newATarget);
             HW.mB.setTargetPosition(newBTarget);
             HW.mC.setTargetPosition(newCTarget);
@@ -102,13 +106,27 @@ public class BP {
         encDriveS(speed, C * MM, OM);
     }
 
-    public void yClaw(char direction, double in, LinearOpMode OM) {
-       /* double MM = 25.4 * in;
+    public void gyroTurn(double speed, double angle, LinearOpMode OM) {
+        if (angle < 0) speed = -speed;
+      while (Math.abs(getHeading()) < Math.abs(angle)) {
+          HW.mA.setPower(speed);
+          HW.mB.setPower(-speed);
+          HW.mC.setPower(-speed);
+          HW.mD.setPower(speed);
+      }
+        HW.mA.setPower(0);
+        HW.mA.setPower(0);
+        HW.mA.setPower(0);
+        HW.mA.setPower(0);
+    }
+
+    /*public void yClaw(char direction, double in, LinearOpMode OM) {
+        double MM = 25.4 * in;
         int d = 1;
         if (direction == '-') d = -1;
         double C = 1;
 
-        HW.elevator.setTargetPosition(HW.elevator.getCurrentPosition() - (int) (C * MM * d * COUNTS_PER_MM));
+        HW.elevator.setTargetPosition(HW.elevator.getCurrentPosition() - (int) (C * MM * d * COUNTS_PER_IN_ELEVATOR));
         HW.elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         HW.elevator.setPower(0.7);
         while (OM.opModeIsActive() && HW.elevator.isBusy()) {
@@ -116,7 +134,22 @@ public class BP {
             OM.telemetry.update();
         }
         HW.elevator.setPower(0);
-        HW.elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
+        HW.elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+*/
+    public void yClawTime(char direction, double in, LinearOpMode OM) {
+        HW.elevator.setDirection(DcMotorSimple.Direction.FORWARD);
+        if (direction == '-') HW.elevator.setDirection(DcMotorSimple.Direction.REVERSE);
+        long time_per_in = 1333;
+        long time = Math.round(in * time_per_in);
+
+        HW.elevator.setPower(0.3);
+        OM.sleep(time);
+        HW.elevator.setPower(0);
+    }
+
+    public void curveClaw(double pos) {
+        HW.armServo.setPosition(pos);
     }
 
     public void Claw(char direction) {
@@ -177,7 +210,7 @@ public class BP {
         return new double[]{pA, pB, pC, pD, 0, 0};
     }
 
-    public static double[] mecPowerX(double iX, double iY, double iR, double offset, LinearOpMode OM, double robotAngle) {
+    public static double[] mecPowerField(double iX, double iY, double iR, double offset, LinearOpMode OM, double robotAngle) {
         if (Math.abs(iX) <= 0.05) iX = 0;
         if (Math.abs(iY) <= 0.05) iY = 0;
         if (Math.abs(iR) <= 0.05) iR = 0;
@@ -185,8 +218,8 @@ public class BP {
         double pB;
         double pC;
         double pD;
-        double Y = iY*Math.cos(-Math.toRadians(robotAngle)) + iX*Math.sin(-Math.toRadians(robotAngle));
-        double X = -iY*Math.sin(-Math.toRadians(robotAngle)) + iX*Math.cos(-Math.toRadians(robotAngle));
+        double Y = iY*Math.cos(-Math.toRadians(robotAngle + offset)) + iX*Math.sin(-Math.toRadians(robotAngle + offset));
+        double X = -iY*Math.sin(-Math.toRadians(robotAngle + offset)) + iX*Math.cos(-Math.toRadians(robotAngle + offset));
         //acquire three desired movement inputs from the
         // driver, y translation, x translation, rotational mostion
         pA = iR + Y + X;
@@ -206,7 +239,7 @@ public class BP {
         pD /= max;
         return new double[]{pA, pB, pC, pD, X, Y};
     }
-   public double getHeading(LinearOpMode OM) {
+   public double getHeading() {
         double rawAngle = Math.toDegrees(HW.imu.getAngularOrientation().firstAngle);
         return(rawAngle);
     }

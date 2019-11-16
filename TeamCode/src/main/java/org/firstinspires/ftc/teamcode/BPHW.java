@@ -20,6 +20,7 @@ public class BPHW {
 
     NormalizedColorSensor colorSensor = null;
     Servo armServo = null;
+    Servo capServo = null;
     DcMotorSimple elevator = null;
    // NormalizedColorSensor colorSensor = null;
 
@@ -32,9 +33,9 @@ public class BPHW {
         imu =OM.hardwareMap.get(BNO055IMU.class, "imu");
         clawServo=OM.hardwareMap.get(Servo.class, "servo");
         colorSensor = OM.hardwareMap.get(NormalizedColorSensor.class, "color");
-
         elevator= OM.hardwareMap.get(DcMotorSimple.class,"elevator");
         armServo = OM.hardwareMap.get(Servo.class, "arm");
+        capServo = OM.hardwareMap.get(Servo.class, "cap");
        // mE = OM.hardwareMap.get(DcMotor.class, "elevatormotor");
         //colorSensor = OM.hardwareMap.get(NormalizedColorSensor.class, "color");
         mB.setDirection(DcMotor.Direction.REVERSE);

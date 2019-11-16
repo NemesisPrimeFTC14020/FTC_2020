@@ -13,6 +13,8 @@ public class Level3QuarryBlue extends LinearOpMode {
         bp.HW.initHW(this);
         waitForStart();
         //Lv3:
+//Curve claw forward
+        bp.curveClaw(0);
 //Extend claw
         bp.Claw('-');
 //Move forward x meters
@@ -21,12 +23,16 @@ public class Level3QuarryBlue extends LinearOpMode {
         int dis = bp.scanforStone('+', this);
 //Claw Skystone
         bp.Claw('+');
+//Lift claw 0.4 with servo
+        bp.curveClaw(0.4);
 //Drive back 5 inches for clearance
         bp.encDriveFin(1, -5, this);
 //Drive x inches towards skybridge
         bp.encDriveSin(1, 72 - dis,this);
 //Extend claw
         bp.Claw('-');
+//Curve claw forward
+        bp.curveClaw(0);
 //Drive back to line
         bp.encDriveSin(1, -9,this);
 

@@ -13,18 +13,32 @@ public class Level2QuarryBlue extends LinearOpMode {
         bp.HW.initHW(this);
         waitForStart();
         //Lv2:
+//Curve claw forward
+        bp.curveClaw(.2);
+        sleep(2000);
 // Open claw
         bp.Claw('-');
+        sleep(2000);
 //Move forward x meters
-        bp.encDriveFin(1, 54,this);
+        bp.encDriveFin(1, 32,this);
 //Collect stone with claw
         bp.Claw('+');
+        sleep(2000);
+//Lift claw 0.3 with servo
+        bp.curveClaw(0.25);
+        sleep(2000);
 // Drive back 5 inches for clearance
-        bp.encDriveFin(1, -5, this);
+        bp.encDriveFin(1, -20, this);
 // Drive x meters towards skybridge
-        bp.encDriveSin(1, 72,this);
+        bp.encDriveSin(1, -60,this);
+//Extend claw
+        bp.Claw('-');
+        sleep(2000);
+//Curve claw forward
+        bp.curveClaw(0);
+        sleep(2000);
 // Drive back to line
-        bp.encDriveSin(1, -9,this);
+        bp.encDriveSin(1, 18,this);
 
     }
 }

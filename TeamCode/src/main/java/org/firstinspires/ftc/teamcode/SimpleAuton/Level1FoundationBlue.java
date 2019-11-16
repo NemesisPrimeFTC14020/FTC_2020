@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.BP;
 
-@Autonomous(name = "QuarryLv1", group = "Linear OpMode")
-public class Level1Quarry extends LinearOpMode {
+@Autonomous(name = "Level1FoundationBlue", group = "Linear OpMode")
+public class Level1FoundationBlue extends LinearOpMode {
     public BP bp = new BP();
 
     @Override
@@ -13,8 +13,9 @@ public class Level1Quarry extends LinearOpMode {
         bp.HW.initHW(this);
         waitForStart();
         //Lv1:
-        //Extend claw
-        bp.Claw('+');
-
+        bp.curveClaw(0);
+        sleep(1000);
+        //Move sideways 9 inches
+        bp.encDriveSin(1, -9, this);
     }
 }
