@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.rev.RevSPARKMini;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -24,7 +22,7 @@ public class BPHW {
     DcMotorSimple elevator = null;
    // NormalizedColorSensor colorSensor = null;
 
-    public void initHW(LinearOpMode OM) {
+    public void initHW(LinearOpMode OM, boolean initGyro) {
 
         mA=OM.hardwareMap.get(DcMotor.class, "motor A");
         mB=OM.hardwareMap.get(DcMotor.class, "motor B");
@@ -49,8 +47,10 @@ public class BPHW {
         mB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mC.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mD.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BNO055IMU.Parameters parametersGyro = new BNO055IMU.Parameters();
-        imu.initialize(parametersGyro);
+        if(initGyro) {
+            BNO055IMU.Parameters parametersGyro = new BNO055IMU.Parameters();
+            imu.initialize(parametersGyro);
+        }
        // mE.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }

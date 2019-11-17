@@ -10,7 +10,7 @@ public class Level1QuarryBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, true);
         waitForStart();
         //Lv1:
         bp.curveClaw(0);

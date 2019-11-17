@@ -10,7 +10,7 @@ public class Level3QuarryBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, true);
         waitForStart();
         //Lv3:
 //Curve claw forward

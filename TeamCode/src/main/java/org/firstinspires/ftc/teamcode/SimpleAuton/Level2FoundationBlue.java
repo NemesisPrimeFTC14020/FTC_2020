@@ -10,9 +10,9 @@ public class Level2FoundationBlue extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, true);
         waitForStart();
-        int forwarddis = 34;
+        int forwarddis = 36;
         int resistance = 10;
         int backwarddis = -1 * (forwarddis + resistance);
         //Lv2:

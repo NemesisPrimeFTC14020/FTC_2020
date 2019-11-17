@@ -8,7 +8,7 @@ public class Teleop extends LinearOpMode {
     public BP bp = new BP();
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, false);
         double[] powers;
         boolean clawServoPos = false;
         boolean global = true;

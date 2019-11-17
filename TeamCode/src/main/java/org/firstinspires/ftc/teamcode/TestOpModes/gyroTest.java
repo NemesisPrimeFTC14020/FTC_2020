@@ -8,7 +8,7 @@ public class gyroTest extends LinearOpMode {
     public BP bp = new BP();
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, false);
 
         waitForStart();
         while(opModeIsActive()) {

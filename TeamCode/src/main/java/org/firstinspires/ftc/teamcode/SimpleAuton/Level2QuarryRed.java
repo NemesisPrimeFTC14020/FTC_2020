@@ -10,7 +10,7 @@ public class Level2QuarryRed extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, true);
         waitForStart();
         //Lv2:
 //Curve claw forward

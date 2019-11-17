@@ -9,7 +9,7 @@ public class encoderCalib extends LinearOpMode {
     public BP bp = new BP();
     @Override
     public void runOpMode() throws InterruptedException {
-        bp.HW.initHW(this);
+        bp.HW.initHW(this, true);
         waitForStart();
         bp.encDriveF(1,500,this);
         telemetry.addData("encoderval", bp.HW.mA.getCurrentPosition());
