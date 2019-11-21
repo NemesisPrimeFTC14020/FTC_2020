@@ -120,6 +120,23 @@ public class BP {
         HW.mA.setPower(0);
         HW.mA.setPower(0);
     }
+    public void gyroTurnTo(double speed, double angle) {
+        double C = 0.9;
+        double target = getHeading() + angle;
+        double error = target - getHeading();
+        if (angle < 0) speed = -speed;
+        while (error < 1) {
+            speed = speed*(.2*error);
+            HW.mA.setPower(speed);
+            HW.mB.setPower(-speed);
+            HW.mC.setPower(-speed);
+            HW.mD.setPower(speed);
+        }
+        HW.mA.setPower(0);
+        HW.mA.setPower(0);
+        HW.mA.setPower(0);
+        HW.mA.setPower(0);
+    }
 
     /*public void yClaw(char direction, double in, LinearOpMode OM) {
         double MM = 25.4 * in;

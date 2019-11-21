@@ -19,10 +19,10 @@ public class Teleop extends LinearOpMode {
         runtime.startTime();
         bp.HW.armServo.setPosition(0);
         while(opModeIsActive()) {
-            if (gamepad1.left_bumper) {
-                global = !global;
-                sleep(200);
-            }
+           // if (gamepad1.left_bumper) {
+             //   global = !global;
+               // sleep(200);
+           // }
             heading = bp.getHeading();
             if (global) {
                 //an input of postiive one leads to forward translation, right sideways motion, and clockwise rotation
@@ -48,6 +48,7 @@ public class Teleop extends LinearOpMode {
                 armServo = false;
             }
             if (gamepad1.right_bumper) bp.HW.capServo.setPosition(Math.abs(bp.HW.capServo.getPosition() - 1));
+            telemetry.addData("Servo pos", bp.HW.capServo.getPosition());
             if(gamepad1.left_trigger >= 0.1) {
                 bp.HW.elevator.setPower(.3);
             } else if (gamepad1.right_trigger >= 0.1) {

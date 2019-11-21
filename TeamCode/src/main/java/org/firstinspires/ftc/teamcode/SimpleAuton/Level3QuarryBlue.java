@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.BP;
 
-@Autonomous(name = "QuarryLv3", group = "Linear OpMode")
+@Autonomous(name = "Lv2QuarryBlue", group = "Linear OpMode")
 public class Level3QuarryBlue extends LinearOpMode {
     public BP bp = new BP();
 
@@ -12,29 +12,33 @@ public class Level3QuarryBlue extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         bp.HW.initHW(this, true);
         waitForStart();
-        //Lv3:
+        //Lv2:
 //Curve claw forward
-        bp.curveClaw(0);
-//Extend claw
+        bp.curveClaw(.2);
+        sleep(2000);
+// Open claw
         bp.Claw('-');
+        sleep(2000);
 //Move forward x meters
-        bp.encDriveFin(1, 54,this);
-//Scan for Skystone
-        int dis = bp.scanforStone('+', this);
-//Claw Skystone
+        bp.encDriveFin(1, 32,this);
+// Scan for skystone
+        int dis = bp.scanforStone('-', this);
+//Collect stone with claw
         bp.Claw('+');
-//Lift claw 0.4 with servo
-        bp.curveClaw(0.4);
-//Drive back 5 inches for clearance
-        bp.encDriveFin(1, -5, this);
-//Drive x inches towards skybridge
-        bp.encDriveSin(1, 72 - dis,this);
+        sleep(2000);
+//Lift claw 0.3 with servo
+        bp.curveClaw(0.25);
+        sleep(2000);
+// Drive back 12 inches for clearance
+        bp.encDriveFin(1, -12, this);
+// Drive 54 inches towards skybridge
+        bp.encDriveSin(1, -54 - dis,this);
 //Extend claw
         bp.Claw('-');
-//Curve claw forward
-        bp.curveClaw(0);
-//Drive back to line
-        bp.encDriveSin(1, -9,this);
+        sleep(2000);
+// Drive back to line
+        bp.encDriveSin(1, 18,this);
+        bp.Claw('+');
 
     }
 }

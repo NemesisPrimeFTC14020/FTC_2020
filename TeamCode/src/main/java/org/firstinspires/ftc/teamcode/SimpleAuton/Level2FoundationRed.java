@@ -12,8 +12,8 @@ public class Level2FoundationRed extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         bp.HW.initHW(this, true);
         waitForStart();
-        int forwarddis = 36;
-        int resistance = 16;
+        int forwarddis = 38;
+        int resistance = 20;
         int backwarddis = -1 * (forwarddis + resistance);
         //Lv2:
         /*bp.encDriveFin(1, 29, this);
@@ -35,7 +35,7 @@ public class Level2FoundationRed extends LinearOpMode {
         // moves forward 34 in
         bp.encDriveFin(1, forwarddis, this);
         // elevator down 2.5 in
-        bp.yClawTime('-', 2.5, this);
+        bp.yClawTime('-', 1.25, this);
         // moves backward 28 in
         bp.encDriveFin(1, backwarddis, this);
         // elevator up 2 in
@@ -43,7 +43,7 @@ public class Level2FoundationRed extends LinearOpMode {
         bp.gyroTurn(1, 10);
         // moves right 48 in
         bp.encDriveSin(1, -30, this);
-        bp.encDriveFin(1, 18, this);
+        bp.encDriveFin(1, 27, this);
         bp.encDriveSin(1, -21, this);
     }
 }

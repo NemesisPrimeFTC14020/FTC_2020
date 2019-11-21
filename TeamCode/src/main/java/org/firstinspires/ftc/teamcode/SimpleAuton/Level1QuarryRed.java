@@ -1,9 +1,10 @@
 package org.firstinspires.ftc.teamcode.SimpleAuton;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.BP;
-
+@Disabled
 @Autonomous(name = "Level1QuarryRed", group = "Linear OpMode")
 public class Level1QuarryRed extends LinearOpMode {
     public BP bp = new BP();

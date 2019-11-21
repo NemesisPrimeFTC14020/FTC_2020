@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TestOpModes;
 
 import android.graphics.Color;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -9,7 +10,7 @@ import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 
-
+@Disabled
 @TeleOp(name="colour sensour", group="A")
 // Test complete. Needs to be within 1/4 of an inch to work.
 // Maybe we can try machine learning with the HSV values to increase range.

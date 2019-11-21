@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+@Disabled
 @TeleOp(name="Mechtest", group="Linear Opmode")
 
 public class mecanumProofOfConcept extends LinearOpMode {
