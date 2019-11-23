@@ -187,8 +187,9 @@ public class BP {
     }
 
     public int scanforStone(char direction, LinearOpMode OM) {
-        SwitchableLight light = (SwitchableLight) HW.colorSensor;
-        light.enableLight(true);
+
+        ((SwitchableLight)HW.colorSensor).enableLight(true);
+
         int d = 1;
         if (direction == '-') d = -1;
         int t = 0;
@@ -199,7 +200,7 @@ public class BP {
             else encDriveSin(1, d * 8, OM);
             t++;
         }
-        light.enableLight(false);
+        ((SwitchableLight)HW.colorSensor).enableLight(false);
         return (t*d*8);
     }
 

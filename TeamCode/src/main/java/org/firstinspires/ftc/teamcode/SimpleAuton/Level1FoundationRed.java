@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.BP;
-
+@Disabled
 @Autonomous(name = "QUARRYPARK", group = "Linear OpMode")
 public class Level1FoundationRed extends LinearOpMode {
     public BP bp = new BP();
